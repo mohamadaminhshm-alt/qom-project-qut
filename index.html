@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد پیشرفته ارزیابی مالی نیروگاه خورشیدی قم</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <style>
+        body { font-family: Vazirmatn, sans-serif; scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header class="bg-gradient-to-r from-slate-900 via-[#0f4c5c] to-slate-900 text-white shadow-xl">
+        <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center md:text-right">
+                <span class="bg-orange-500/20 text-orange-300 text-xs px-3 py-1 rounded-full font-semibold border border-orange-500/30">مدل ارزیابی مالی مصوب</span>
+                <h1 class="text-xl md:text-2xl font-black mt-1 tracking-tight">سامانه جامع مدیریت و ارزیابی اقتصادی نیروگاه خورشیدی ۱ مگاواتی</h1>
+                <p class="text-xs text-slate-300 mt-0.5">پروژه درس اقتصاد پروژه‌های عمرانی — دانشگاه صنعتی قم</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="switchTab('dashboard')" id="btn-dashboard" class="tab-btn bg-orange-500 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition">داشبورد اصلی</button>
+                <button onclick="switchTab('sensitivity')" id="btn-sensitivity" class="tab-btn bg-white/10 text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-white/20 transition">تحلیل حساسیت</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-6 py-8">
+
+        <div id="tab-dashboard" class="space-y-8">
+            
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <h2 class="text-base font-bold text-[#0f4c5c] mb-3 flex items-center gap-2">
+                    <span>📑</span> خلاصه و مبانی استراتژیک طرح توجیهی
+                </h2>
+                <p class="text-sm text-slate-600 leading-relaxed text-justify">
+                    هدف این پروژه، بررسی اقتصادی و ارزیابی مالی احداث یک نیروگاه خورشیدی با ظرفیت ۱ مگاوات در استان قم بر اساس مصوبات و تعرفه‌های خرید تضمینی سازمان ساتبا است. در این مدل، هزینه‌های سرمایه‌گذاری اولیه (<span class="font-semibold text-slate-900">۱۷.۵ میلیارد تومان</span>) بر اساس پتانسیل تابش واقعی منطقه (تولید ویژه ۱۷۰۰ کیلووات ساعت به ازای هر کیلووات نامی) تحلیل شده است. در سناریوی اول، تأمین ۱۰۰٪ سرمایه توسط بخش خصوصی انجام شده و در سناریوی دوم شهرداری با مشارکت ۴۰ درصدی، سرمایه اولیه مورد نیاز سرمایه‌گذار را به ۱۰.۵ میلیارد تومان کاهش می‌دهد.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-[#0f4c5c] space-y-4">
+                    <h3 class="text-sm font-bold text-[#0f4c5c] border-b border-slate-100 pb-2">📊 سناریوی ۱ (تأمین ۱۰۰٪ سرمایه توسط سرمایه‌گذار)</h3>
+                    <div class="grid grid-cols-3 gap-2 text-center">
+                        <div class="bg-slate-50 p-3 rounded-xl">
+                            <span class="text-[10px] text-slate-500 block">ارزش فعلی خالص (NPV)</span>
+                            <span class="text-xs font-black text-emerald-600 block mt-1">۳۸,۹۸۳.۵ م.ت</span>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-xl">
+                            <span class="text-[10px] text-slate-500 block">نرخ بازده داخلی (IRR)</span>
+                            <span class="text-xs font-black text-blue-600 block mt-1">۵۲.۱۹٪</span>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-xl">
+                            <span class="text-[10px] text-slate-500 block">دوره بازگشت سرمایه</span>
+                            <span class="text-xs font-black text-orange-600 block mt-1">۳ سال</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-orange-500 space-y-4">
+                    <h3 class="text-sm font-bold text-orange-600 border-b border-slate-100 pb-2">📊 سناریوی ۲ (۴۰٪ مشارکت شهرداری در سرمایه‌گذاری)</h3>
+                    <div class="grid grid-cols-3 gap-2 text-center">
+                        <div class="bg-slate-50 p-3 rounded-xl">
+                            <span class="text-[10px] text-slate-500 block">ارزش فعلی خالص (NPV)</span>
+                            <span class="text-xs font-black text-emerald-600 block mt-1">۴۵,۹۸۳.۵ م.ت</span>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-xl">
+                            <span class="text-[10px] text-slate-500 block">نرخ بازده داخلی (IRR)</span>
+                            <span class="text-xs font-black text-blue-600 block mt-1">۷۳.۸۱٪</span>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-xl">
+                            <span class="text-[10px] text-slate-500 block">دوره بازگشت سرمایه</span>
+                            <span class="text-xs font-black text-orange-600 block mt-1">۲ سال</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 lg:col-span-2">
+                    <h3 class="text-xs font-bold text-slate-700 mb-3">📈 نمودار مقایسه‌ای جریان نقدی سالانه عمر ۲۰ ساله پروژه (میلیون تومان)</h3>
+                    <div class="h-64"><canvas id="cashFlowChart"></canvas></div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xs font-bold text-slate-700 mb-2">📌 مفروضات کلیدی ورودی اکسل</h3>
+                        <div class="text-xs space-y-2 text-slate-600">
+                            <div class="flex justify-between border-b pb-1"><span>هزینه کل سرمایه‌گذاری (CAPEX):</span><span class="font-bold text-slate-800">۱۷.۵ میلیارد تومان</span></div>
+                            <div class="flex justify-between border-b pb-1"><span>سهم تجهیزات (پنل و اینورتر):</span><span class="font-bold text-slate-800">۷۵٪</span></div>
+                            <div class="flex justify-between border-b pb-1"><span>تولید سال اول:</span><span class="font-bold text-slate-800">۱,۷۰۰,۰۰۰ kWh</span></div>
+                            <div class="flex justify-between border-b pb-1"><span>افت سالانه پنل (Degradation):</span><span class="font-bold text-slate-800">۰.۵٪</span></div>
+                            <div class="flex justify-between border-b pb-1"><span>تعرفه سربه سر خرید برق:</span><span class="font-bold text-red-600">۹,۷۵۹ ریال/kWh</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-emerald-50 text-emerald-900 border border-emerald-100 p-3 rounded-xl text-[11px] leading-relaxed mt-4">
+                        <strong>نتیجه‌گیری مدل:</strong> طبق داده‌های اکسل، نسبت سود به هزینه (PI) در سناریوی اول ۳.۲۲ و در سناریوی دوم به ۵.۳۷ افزایش می‌یابد که نشان‌دهنده توجیه بسیار ممتاز اقتصادی این طرح عمرانی تجدیدپذیر است.
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-4 bg-slate-50 border-b border-slate-200">
+                    <h3 class="text-xs font-bold text-[#0f4c5c]">📋 جدول جزئیات شبیه‌سازی بیست ساله جریان نقدی (مبالغ به میلیون تومان)</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-center text-xs">
+                        <thead class="bg-[#0f4c5c] text-white">
+                            <tr>
+                                <th class="py-2.5 px-2">سال</th>
+                                <th class="py-2.5 px-2">تعرفه (ریال)</th>
+                                <th class="py-2.5 px-2">تولید سالانه (kWh)</th>
+                                <th class="py-2.5 px-2">درآمد فروش</th>
+                                <th class="py-2.5 px-2">هزینه سالانه (O&M)</th>
+                                <th class="py-2.5 px-2">جریان نقدی (سناریو ۱)</th>
+                                <th class="py-2.5 px-2">جریان نقدی (سناریو ۲)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="divide-y divide-slate-200 font-medium">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-sensitivity" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <h2 class="text-base font-bold text-[#0f4c5c] mb-2">📊 تحلیل حساسیت شاخص‌های کلیدی پروژه (نسبت به سناریوی مبنا)</h2>
+                <p class="text-xs text-slate-500">پایداری مالی پروژه در مواجهه با نوسانات متغیرهای کلیدی بر اساس داده‌های حقیقی استخراج‌شده از برگه تخصصی حساسیت اکسل:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="text-xs font-bold text-slate-800 mb-3 border-b pb-1.5">۱. حساسیت نسبت به تعرفه خرید برق</h4>
+                    <table class="w-full text-[11px] text-center">
+                        <thead class="bg-slate-100 text-slate-700">
+                            <tr><th class="p-1.5">تغییر</th><th class="p-1.5">تعرفه (ریال)</th><th class="p-1.5">NPV (میلیون)</th><th class="p-1.5">IRR</th></tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr><td class="p-1.5 text-red-500">-۲۰٪</td><td class="p-1.5">۲۵,۲۰۰</td><td class="p-1.5">۲۷,۶۸۶</td><td class="p-1.5">۴۵.۹٪</td></tr>
+                            <tr><td class="p-1.5 text-red-400">-۱۰٪</td><td class="p-1.5">۲۸,۳۵۰</td><td class="p-1.5">۳۳,۳۳۵</td><td class="p-1.5">۴۹.۰٪</td></tr>
+                            <tr class="bg-orange-50 font-bold"><td class="p-1.5">۰٪ (پایه)</td><td class="p-1.5">۳۱,۵۰۰</td><td class="p-1.5">۳۸,۹۸۳</td><td class="p-1.5">۵۲.۱٪</td></tr>
+                            <tr><td class="p-1.5 text-emerald-500">+۱۰٪</td><td class="p-1.5">۳۴,۶۵۰</td><td class="p-1.5">۴۴,۶۳۱</td><td class="p-1.5">۵۵.۳٪</td></tr>
+                            <tr><td class="p-1.5 text-emerald-600">+۲۰٪</td><td class="p-1.5">۳۷,۸۰۰</td><td class="p-1.5">۵۰,۲۸۰</td><td class="p-1.5">۵۸.۴٪</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="text-xs font-bold text-slate-800 mb-3 border-b pb-1.5">۲. حساسیت نسبت به سرمایه‌گذاری اولیه (CAPEX)</h4>
+                    <table class="w-full text-[11px] text-center">
+                        <thead class="bg-slate-100 text-slate-700">
+                            <tr><th class="p-1.5">تغییر</th><th class="p-1.5">CAPEX (میلیارد)</th><th class="p-1.5">NPV (میلیون)</th><th class="p-1.5">بازگشت (سال)</th></tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr><td class="p-1.5 text-emerald-600">-۲۰٪</td><td class="p-1.5">۱۴.۰</td><td class="p-1.5">۳۵,۴۸۳</td><td class="p-1.5">۲.۴</td></tr>
+                            <tr><td class="p-1.5 text-emerald-500">-۱۰٪</td><td class="p-1.5">۱۵.۷</td><td class="p-1.5">۳۷,۲۳۳</td><td class="p-1.5">۲.۷</td></tr>
+                            <tr class="bg-orange-50 font-bold"><td class="p-1.5">۰٪ (پایه)</td><td class="p-1.5">۱۷.۵</td><td class="p-1.5">۳۸,۹۸۳</td><td class="p-1.5">۳.۰</td></tr>
+                            <tr><td class="p-1.5 text-red-400">+۱۰٪</td><td class="p-1.5">۱۹.۲</td><td class="p-1.5">۴۰,۷۳۳</td><td class="p-1.5">۳.۳</td></tr>
+                            <tr><td class="p-1.5 text-red-500">+۲۰٪</td><td class="p-1.5">۲۱.۰</td><td class="p-1.5">۴۲,۴۸۳</td><td class="p-1.5">۳.۶</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="text-xs font-bold text-slate-800 mb-3 border-b pb-1.5">۳. حساسیت نسبت به میزان تولید سالانه برق</h4>
+                    <table class="w-full text-[11px] text-center">
+                        <thead class="bg-slate-100 text-slate-700">
+                            <tr><th class="p-1.5">تغییر</th><th class="p-1.5">تولید (kWh)</th><th class="p-1.5">NPV (میلیون)</th><th class="p-1.5">وضعیت توجیه</th></tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr><td class="p-1.5 text-red-500">-۲۰٪</td><td class="p-1.5">۱,۳۶۰,۰۰۰</td><td class="p-1.5">۲۷,۶۸۶</td><td class="p-1.5 text-emerald-600 font-semibold">توجیه دارد</td></tr>
+                            <tr><td class="p-1.5 text-red-400">-۱۰٪</td><td class="p-1.5">۱,۵۳۰,۰۰۰</td><td class="p-1.5">۳۳,۳۳۵</td><td class="p-1.5 text-emerald-600 font-semibold">توجیه دارد</td></tr>
+                            <tr class="bg-orange-50 font-bold"><td class="p-1.5">۰٪ (پایه)</td><td class="p-1.5">۱,۷۰۰,۰۰۰</td><td class="p-1.5">۳۸,۹۸۳</td><td class="p-1.5 text-emerald-600 font-semibold">توجیه دارد</td></tr>
+                            <tr><td class="p-1.5 text-emerald-500">+۱۰٪</td><td class="p-1.5">۱,۸۷۰,۰۰۰</td><td class="p-1.5">۴۴,۶۳۱</td><td class="p-1.5 text-emerald-600 font-semibold">توجیه دارد</td></tr>
+                            <tr><td class="p-1.5 text-emerald-600">+۲۰٪</td><td class="p-1.5">۲,۰۴۰,۰۰۰</td><td class="p-1.5">۵۰,۲۸۰</td><td class="p-1.5 text-emerald-600 font-semibold">توجیه دارد</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Real Data arrays extracted directly from your Excel CSV sheets
+        const rawTableData = [
+            {y: 0, tariff: "-", gen: "-", rev: 0, opex: 0, cfs1: -17500, cfs2: -10500},
+            {y: 1, tariff: "31,500", gen: "1,700,000", rev: 5355, opex: 350, cfs1: 5005, cfs2: 5005},
+            {y: 2, tariff: "40,950", gen: "1,691,500", rev: 6926.7, opex: 455, cfs1: 6471.7, cfs2: 6471.7},
+            {y: 3, tariff: "53,235", gen: "1,683,043", rev: 8959.7, opex: 591.5, cfs1: 8368.2, cfs2: 8368.2},
+            {y: 4, tariff: "69,205.5", gen: "1,674,627", rev: 11589.3, opex: 769, cfs1: 10820.4, cfs2: 10820.4},
+            {y: 5, tariff: "89,967.2", gen: "1,666,254", rev: 14990.8, opex: 999.6, cfs1: 13991.2, cfs2: 13991.2},
+            {y: 6, tariff: "116,957.3", gen: "1,657,923", rev: 19390.6, opex: 1299.5, cfs1: 18091.1, cfs2: 18091.1},
+            {y: 7, tariff: "152,044.5", gen: "1,649,633", rev: 25081.8, opex: 1689.4, cfs1: 23392.4, cfs2: 23392.4},
+            {y: 8, tariff: "118,594.7", gen: "1,641,385", rev: 19466.0, opex: 2196.2, cfs1: 17269.8, cfs2: 17269.8},
+            {y: 9, tariff: "154,173.1", gen: "1,633,178", rev: 25179.2, opex: 2855.1, cfs1: 22324.2, cfs2: 22324.2},
+            {y: 10, tariff: "200,425.0", gen: "1,625,012", rev: 32569.3, opex: 3711.6, cfs1: 28857.7, cfs2: 28857.7},
+            {y: 11, tariff: "260,552.5", gen: "1,616,887", rev: 42128.4, opex: 4825.0, cfs1: 37303.4, cfs2: 37303.4},
+            {y: 12, tariff: "203,230.1", gen: "1,608,803", rev: 32695.9, opex: 6272.6, cfs1: 26423.3, cfs2: 26423.3},
+            {y: 13, tariff: "264,200.3", gen: "1,600,759", rev: 42292.1, opex: 8154.3, cfs1: 34137.8, cfs2: 34137.8},
+            {y: 14, tariff: "343,460.4", gen: "1,592,755", rev: 54704.8, opex: 10600.6, cfs1: 44104.2, cfs2: 44104.2},
+            {y: 15, tariff: "446,498.5", gen: "1,584,791", rev: 70760.7, opex: 13780.8, cfs1: 56979.9, cfs2: 56979.9},
+            {y: 16, tariff: "348,268.8", gen: "1,576,867", rev: 54917.4, opex: 17915.1, cfs1: 37002.3, cfs2: 37002.3},
+            {y: 17, tariff: "452,749.5", gen: "1,568,983", rev: 71035.6, opex: 23289.6, cfs1: 47746.0, cfs2: 47746.0},
+            {y: 18, tariff: "588,574.3", gen: "1,561,138", rev: 91884.6, opex: 30276.5, cfs1: 61608.1, cfs2: 61608.1},
+            {y: 19, tariff: "765,146.6", gen: "1,553,332", rev: 118852.7, opex: 39359.4, cfs1: 79493.3, cfs2: 79493.3},
+            {y: 20, tariff: "994,690.6", gen: "1,545,566", rev: 153736.0, opex: 51167.2, cfs1: 102568.7, cfs2: 102568.7}
+        ];
+
+        // Injects Data rows into Table HTML
+        function buildTable() {
+            const tbody = document.getElementById('table-body');
+            rawTableData.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.className = row.y % 2 === 0 ? 'bg-white' : 'bg-slate-50';
+                
+                const formatNum = (num) => num === 0 ? "0" : num.toLocaleString(undefined, {maximumFractionDigits:1});
+                const s1Color = row.cfs1 < 0 ? 'text-red-600 font-bold' : 'text-emerald-600 font-bold';
+                const s2Color = row.cfs2 < 0 ? 'text-red-600 font-bold' : 'text-emerald-600 font-bold';
+
+                tr.innerHTML = `
+                    <td class="py-2 px-2 font-bold text-slate-900">${row.y}</td>
+                    <td class="py-2 px-2 text-slate-600">${row.tariff}</td>
+                    <td class="py-2 px-2 text-slate-600">${row.gen}</td>
+                    <td class="py-2 px-2">${row.y === 0 ? '-' : formatNum(row.rev)}</td>
+                    <td class="py-2 px-2">${row.y === 0 ? '-' : formatNum(row.opex)}</td>
+                    <td class="py-2 px-2 ${s1Color}">${row.cfs1 > 0 ? '+' : ''}${formatNum(row.cfs1)}</td>
+                    <td class="py-2 px-2 ${s2Color}">${row.cfs2 > 0 ? '+' : ''}${formatNum(row.cfs2)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Render Chart.js
+        function renderChart() {
+            const ctx = document.getElementById('cashFlowChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: rawTableData.map(r => "سال " + r.y),
+                    datasets: [
+                        { label: 'سناریو ۱ (مستقل)', data: rawTableData.map(r => r.cfs1), backgroundColor: '#0f4c5c', borderRadius: 3 },
+                        { label: 'سناریو ۲ (مشارکت شهرداری)', data: rawTableData.map(r => r.cfs2), backgroundColor: '#e36414', borderRadius: 3 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } },
+                    plugins: { legend: { labels: { font: { family: 'Vazirmatn', size: 10 } } } }
+                }
+            });
+        }
+
+        // Handle Tab Switching
+        function switchTab(tabId) {
+            document.getElementById('tab-dashboard').classList.add('hidden');
+            document.getElementById('tab-sensitivity').classList.add('hidden');
+            document.getElementById('btn-dashboard').className = 'tab-btn bg-white/10 text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-white/20 transition';
+            document.getElementById('btn-sensitivity').className = 'tab-btn bg-white/10 text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-white/20 transition';
+
+            if(tabId === 'dashboard') {
+                document.getElementById('tab-dashboard').classList.remove('hidden');
+                document.getElementById('btn-dashboard').className = 'tab-btn bg-orange-500 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition';
+            } else {
+                document.getElementById('tab-sensitivity').classList.remove('hidden');
+                document.getElementById('btn-sensitivity').className = 'tab-btn bg-orange-500 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-sm transition';
+            }
+        }
+
+        window.onload = function() {
+            buildTable();
+            renderChart();
+        }
+    </script>
+</body>
+</html>
